@@ -1,0 +1,564 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reporte de fallas en laboratorios</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #172033;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        h1 {
+            color: #174a87;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .instrucciones {
+            color: #555;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.5;
+        }
+
+        form {
+            background-color: white;
+            max-width: 550px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        .aviso {
+            color: #526174;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0 0 15px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .asterisco {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font: inherit;
+            background-color: white;
+        }
+
+            input::placeholder,
+            textarea::placeholder {
+                color: #64748b;
+            }
+
+            input:focus,
+            select:focus,
+            textarea:focus {
+                outline: 2px solid #174a87;
+                outline-offset: 1px;
+            }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .ayuda {
+            display: block;
+            margin-top: 6px;
+            color: #526174;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .botones {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            button[type="submit"] {
+                background-color: #174a87;
+                color: white;
+            }
+
+                button[type="submit"]:hover {
+                    background-color: #103964;
+                }
+
+            button[type="reset"] {
+                background-color: #e5e7eb;
+                color: #333;
+            }
+
+                button[type="reset"]:hover {
+                    background-color: #d1d5db;
+                }
+
+            button:focus-visible {
+                outline: 3px solid #174a87;
+                outline-offset: 3px;
+            }
+
+        .mensaje {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 6px;
+            line-height: 1.5;
+        }
+
+        .exito {
+            background-color: #e9f7ee;
+            color: #175c30;
+        }
+
+        .error {
+            background-color: #fff0f0;
+            color: #a12020;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            form {
+                padding: 20px;
+            }
+
+            .botones button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Reporte de fallas en laboratorios</h1>
+
+    <p class="instrucciones">
+        Complete el siguiente formulario para identificar
+        y describir problemas en los computadores de la universidad.
+    </p>
+
+    <form id="formulario_reporte">
+
+        <p class="aviso">
+            Los campos marcados con
+            <span class="asterisco">*</span>
+            son obligatorios.
+        </p>
+
+        <!-- NOMBRE DEL ESTUDIANTE -->
+
+        <label for="nombre">
+            Nombre del estudiante
+            <span class="asterisco">*</span>
+        </label>
+
+        <input type="text"
+               id="nombre"
+               name="nombre"
+               placeholder="Escriba su nombre y apellido"
+               autocomplete="name"
+               required>
+
+
+        <!-- LABORATORIO -->
+
+        <label for="laboratorio">
+            Laboratorio
+            <span class="asterisco">*</span>
+        </label>
+
+        <select id="laboratorio"
+                name="laboratorio"
+                required>
+
+            <option value="" selected disabled>
+                Seleccione el laboratorio donde está el equipo
+            </option>
+
+            <option value="1">Laboratorio 1</option>
+            <option value="2">Laboratorio 2</option>
+            <option value="3">Laboratorio 3</option>
+        </select>
+
+
+        <!-- CÓDIGO DEL COMPUTADOR -->
+
+        <label for="equipo">
+            Código del computador
+            <span class="asterisco">*</span>
+        </label>
+
+        <input type="text"
+               id="equipo"
+               name="equipo"
+               placeholder="Ejemplo: PC-012"
+               required>
+
+
+        <!-- FECHA DE LA FALLA -->
+
+        <label for="fecha_falla">
+            Fecha en que se detectó la falla
+            <span class="asterisco">*</span>
+        </label>
+
+        <input type="date"
+               id="fecha_falla"
+               name="fecha_falla"
+               aria-describedby="ayuda_fecha"
+               required>
+
+        <small class="ayuda" id="ayuda_fecha">
+            Seleccione el día, mes y año en el calendario.
+        </small>
+
+
+        <!-- HORA DE LA FALLA -->
+
+        <label for="hora_falla">
+            Hora en que se detectó la falla
+            <span class="asterisco">*</span>
+        </label>
+
+        <input type="time"
+               id="hora_falla"
+               name="hora_falla"
+               aria-describedby="ayuda_hora"
+               required>
+
+        <small class="ayuda" id="ayuda_hora">
+            Seleccione la hora aproximada en que
+            descubrió el problema.
+        </small>
+
+
+        <!-- TIPO DE FALLA -->
+
+        <label for="falla">
+            Tipo de falla
+            <span class="asterisco">*</span>
+        </label>
+
+        <select id="falla"
+                name="falla"
+                required>
+
+            <option value="" selected disabled>
+                Seleccione el problema que presenta el equipo
+            </option>
+
+            <option value="encendido">No enciende</option>
+            <option value="internet">Sin conexión a internet</option>
+            <option value="teclado">Problema con el teclado</option>
+            <option value="pantalla">Problema con la pantalla</option>
+            <option value="software">Error de software</option>
+            <option value="otro">Otro problema</option>
+        </select>
+
+
+        <!-- CAMPO QUE SOLO APARECE AL SELECCIONAR OTRO -->
+
+        <div id="campo_otro" hidden>
+
+            <label for="otro_problema">
+                Describa qué otro problema presenta
+                el computador
+                <span class="asterisco">*</span>
+            </label>
+
+            <textarea id="otro_problema"
+                      name="otro_problema"
+                      rows="4"
+                      placeholder="Ejemplo: El computador se reinicia al abrir un programa"></textarea>
+
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div class="botones">
+
+            <button type="submit">
+                Validar formulario
+            </button>
+
+            <button type="reset">
+                Limpiar formulario
+            </button>
+
+        </div>
+
+
+        <!-- MENSAJES DE VALIDACIÓN -->
+
+        <div id="mensaje"
+             class="mensaje"
+             role="status"
+             aria-live="polite"
+             hidden>
+        </div>
+
+        <p class="ayuda">
+            Esta es una demostración de diseño UX.
+            La información no se guarda ni se envía.
+        </p>
+
+    </form>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Obtener elementos del formulario
+
+        const formulario =
+            document.getElementById("formulario_reporte");
+
+        const nombre =
+            document.getElementById("nombre");
+
+        const equipo =
+            document.getElementById("equipo");
+
+        const falla =
+            document.getElementById("falla");
+
+        const campoOtro =
+            document.getElementById("campo_otro");
+
+        const otroProblema =
+            document.getElementById("otro_problema");
+
+        const fechaFalla =
+            document.getElementById("fecha_falla");
+
+        const horaFalla =
+            document.getElementById("hora_falla");
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+
+        // Mostrar mensajes de éxito o error
+
+        function mostrarMensaje(texto, tipo) {
+
+            mensaje.textContent = texto;
+
+            mensaje.className = "mensaje " + tipo;
+
+            mensaje.hidden = false;
+        }
+
+
+        // Ocultar el mensaje anterior
+
+        function ocultarMensaje() {
+            mensaje.hidden = true;
+        }
+
+
+        // Mostrar u ocultar el campo Otro problema
+
+        function actualizarCampoOtro() {
+
+            const esOtro = falla.value === "otro";
+
+            campoOtro.hidden = !esOtro;
+
+            otroProblema.required = esOtro;
+
+            if (!esOtro) {
+                otroProblema.value = "";
+            }
+        }
+
+
+        // Detectar cambios en la lista de fallas
+
+        falla.addEventListener("change", function () {
+            actualizarCampoOtro();
+            ocultarMensaje();
+        });
+
+
+        // Ocultar mensajes si se modifican los datos
+
+        formulario.addEventListener(
+            "input",
+            ocultarMensaje
+        );
+
+        formulario.addEventListener(
+            "change",
+            ocultarMensaje
+        );
+
+
+        // Confirmar antes de limpiar los campos
+
+        formulario.addEventListener(
+            "reset",
+            function (evento) {
+
+                const confirmar = window.confirm(
+                    "¿Está seguro de que desea limpiar el formulario? " +
+                    "Se perderán los datos que escribió."
+                );
+
+                if (!confirmar) {
+                    evento.preventDefault();
+                    return;
+                }
+
+                campoOtro.hidden = true;
+                otroProblema.required = false;
+                otroProblema.value = "";
+
+                ocultarMensaje();
+            }
+        );
+
+
+        // Validar el formulario
+
+        formulario.addEventListener(
+            "submit",
+            function (evento) {
+
+                // Evitar el envío a un servidor
+                evento.preventDefault();
+
+                ocultarMensaje();
+
+
+                // Validar que el nombre no tenga solo espacios
+
+                if (!nombre.value.trim()) {
+
+                    mostrarMensaje(
+                        "Ingrese el nombre del estudiante.",
+                        "error"
+                    );
+
+                    nombre.focus();
+                    return;
+                }
+
+
+                // Validar el código del computador
+
+                if (!equipo.value.trim()) {
+
+                    mostrarMensaje(
+                        "Ingrese el código del computador.",
+                        "error"
+                    );
+
+                    equipo.focus();
+                    return;
+                }
+
+
+                // Validar fecha y hora de la falla
+
+                const fechaHora = new Date(
+                    fechaFalla.value + "T" + horaFalla.value
+                );
+
+                const ahora = new Date();
+
+                if (
+                    Number.isNaN(fechaHora.getTime()) ||
+                    fechaHora > ahora
+                ) {
+
+                    mostrarMensaje(
+                        "La fecha y la hora no pueden ser futuras. " +
+                        "Verifique cuándo se detectó la falla.",
+                        "error"
+                    );
+
+                    fechaFalla.focus();
+                    return;
+                }
+
+
+                // Validar la opción Otro problema
+
+                if (
+                    falla.value === "otro" &&
+                    !otroProblema.value.trim()
+                ) {
+
+                    mostrarMensaje(
+                        "Describa qué otro problema presenta el computador.",
+                        "error"
+                    );
+
+                    otroProblema.focus();
+                    return;
+                }
+
+
+                // Confirmación final
+
+                mostrarMensaje(
+                    "Formulario validado correctamente. " +
+                    "Todos los campos están completos.",
+                    "exito"
+                );
+
+            }
+        );
+
+
+        // Mantener oculto el campo adicional al abrir la página
+
+        actualizarCampoOtro();
+
+    </script>
+
+</body>
+</html>
